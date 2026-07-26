@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Trilha — sistema de design.
+ * Fonte única: docs/prototipacao/01-sistema-de-design.md.
+ *
+ * Estes valores vêm da spec, não do export do Stitch. Onde os dois divergiram
+ * (paper, ink, trail, clay, escala de radius, biblioteca de ícones), a spec
+ * venceu — ver o relatório de reconciliação registrado no kickoff.
+ *
+ * Não existe paleta de erro neste sistema. Não adicione uma.
+ */
+
+@theme {
+  /* --- Paleta base ------------------------------------------------------ */
+  --color-paper: #f3f4f0; /* fundo base */
+  --color-ink: #23261f; /* texto principal */
+  --color-trail: #3f5a45; /* ação primária, o "fio" */
+  --color-clay: #b9793e; /* sugestão de IA, celebração */
+  --color-mist: #dadfd7; /* bordas, divisores */
+
+  /*
+   * RN-71 — `signal` é a única cor de alerta do sistema e só pode aparecer na
+   * Revisão Semanal (medidor de capacidade acima de 80%, RN-41). Nenhuma outra
+   * tela usa esta cor: nem meta vencida, nem entregável estourado, nem erro de
+   * formulário. Se você está prestes a usar `signal` fora da Revisão Semanal,
+   * a resposta certa é `clay`.
+   */
+  --color-signal: #a64b3e;
+
+  /* --- Paleta de Área (categórica, escolhida pelo usuário) --------------- */
+  /* Nunca reutilizar trail/clay/signal como cor de Área. */
+  --color-area-1: #5b7b9c; /* azul-poeira */
+  --color-area-2: #c08a3e; /* ocre */
+  --color-area-3: #6e8b6e; /* sage */
+  --color-area-4: #8b6a8f; /* ameixa */
+  --color-area-5: #5b6670; /* ardósia */
+  --color-area-6: #b06b4a; /* terracota */
+
+  /* --- Grid de 8px ------------------------------------------------------ */
+  /*
+   * Base de 4px faz as utilities numéricas caírem exatamente na escala nomeada
+   * da spec: p-1=4 p-2=8 p-3=12 p-4=16 p-6=24 p-8=32 p-12=48 p-16=64.
+   */
+  --spacing: 4px;
+  --container-trilha: 1440px;
+
+  /* --- Tipografia ------------------------------------------------------- */
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-ibm-plex-mono);
+
+  /* Fraunces só em título de página e na celebração de 85% da fase. */
+  --text-display-xl: 40px;
+  --text-display-xl--line-height: 48px;
+  --text-display-xl--font-weight: 600;
+
+  --text-display-l: 28px;
+  --text-display-l--line-height: 36px;
+  --text-display-l--font-weight: 600;
+
+  /* Título de card usa Heading (Inter), nunca Fraunces. */
+  --text-heading: 20px;
+  --text-heading--line-height: 28px;
+  --text-heading--font-weight: 600;
+
+  --text-body: 16px;
+  --text-body--line-height: 24px;
+  --text-body--font-weight: 400;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--font-weight: 400;
+
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+  --text-caption--font-weight: 500;
+  --text-caption--letter-spacing: 0.04em;
+
+  /* Estimativas, percentuais, contadores de streak. */
+  --text-data: 14px;
+  --text-data--line-height: 20px;
+  --text-data--font-weight: 500;
+
+  /* --- Forma ------------------------------------------------------------ */
+  --radius-sm: 6px; /* badges, chips, pills */
+  --radius-md: 8px; /* cards */
+  --radius-lg: 12px; /* modais, drawers, painéis flutuantes */
+
+  /* --- Elevação --------------------------------------------------------- */
+  /* Cards nunca têm sombra no estado padrão — borda de 1px mist. */
+  --shadow-overlay: 0 8px 24px rgb(35 38 31 / 0.12); /* só modais e drawers */
+  --shadow-drag: 0 4px 12px rgb(35 38 31 / 0.15); /* só durante o drag */
+
+  /* --- Movimento -------------------------------------------------------- */
+  --duration-ui: 150ms; /* hover/focus */
+  --duration-progress: 400ms; /* preenchimento de barra ao concluir ação */
+  --ease-trilha: cubic-bezier(0, 0, 0.2, 1); /* ease-out */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  /* Foco visível em trail — o produto é calmo, mas não inacessível. */
+  :focus-visible {
+    outline: 2px solid var(--color-trail);
+    outline-offset: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/*
+ * "Respeitar prefers-reduced-motion: reduce — nesse caso, todas as transições
+ * viram instantâneas (0ms), sem exceção." (01-sistema-de-design.md)
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

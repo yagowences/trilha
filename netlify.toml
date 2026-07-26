@@ -1,0 +1,15 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Runtime oficial do Next.js no Netlify: cuida de SSR, Server Actions,
+# middleware e cache de rotas sem configuração extra.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Variáveis de ambiente ficam no painel do Netlify, nunca neste arquivo:
+# SUPABASE_SERVICE_ROLE_KEY commitada seria um vazamento de credencial
+# (AGENTS.md — limites explícitos).
