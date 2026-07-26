@@ -1,0 +1,37 @@
+{
+  "app": {
+    "name": "Trilha",
+    "description": "Conecta metas de longo prazo às ações do seu dia, sem perder o fio."
+  },
+  "auth": {
+    "emailLabel": "E-mail",
+    "passwordLabel": "Senha",
+    "nameLabel": "Como podemos te chamar?",
+    "login": {
+      "submit": "Entrar",
+      "submitting": "Entrando...",
+      "noAccount": "Não tem conta?",
+      "createAccount": "Criar conta"
+    },
+    "signup": {
+      "title": "Criar conta",
+      "submit": "Criar conta",
+      "submitting": "Criando...",
+      "hasAccount": "Já tem conta?",
+      "login": "Entrar"
+    },
+    "confirm": {
+      "title": "Confirme seu e-mail",
+      "body": "Enviamos um link de confirmação. Abra ele para ativar sua conta.",
+      "backToLogin": "Voltar para o login"
+    },
+    "errors": {
+      "emailFormat": "Verifique se o e-mail está no formato correto.",
+      "badCredentials": "E-mail ou senha não conferem.",
+      "passwordTooShort": "A senha precisa ter pelo menos 8 caracteres.",
+      "nameRequired": "Como podemos te chamar?",
+      "invalidLink": "Esse link expirou ou já foi usado. Peça um novo.",
+      "generic": "Não foi possível concluir agora. Tente de novo."
+    }
+  }
+}

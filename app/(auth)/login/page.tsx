@@ -1,8 +1,14 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 import { LoginForm } from "./login-form";
 
-export const metadata = { title: "Entrar — Trilha" };
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("auth.login");
+  const tApp = await getTranslations("app");
+  return { title: `${t("submit")} — ${tApp("name")}` };
+}
 
 export default function LoginPage() {
   return (

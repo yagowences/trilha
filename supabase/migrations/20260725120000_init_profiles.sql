@@ -13,6 +13,11 @@ create table if not exists public.profiles (
   id         uuid primary key references auth.users (id) on delete cascade,
   name       text,
   timezone   text        not null default 'America/Sao_Paulo',
+  -- Produto trilíngue (decisão da revisão de protótipo, ver AGENTS.md). Fica
+  -- aqui e não só no cookie porque o idioma precisa sobreviver a troca de
+  -- dispositivo e, na Fase 5, decidir em que língua a IA responde.
+  locale     text        not null default 'pt'
+             constraint profiles_locale_supported check (locale in ('pt', 'en', 'es')),
   created_at timestamptz not null default now()
 );
 
@@ -70,10 +75,18 @@ security definer
 set search_path = ''
 as $$
 begin
-  insert into public.profiles (id, name)
+  insert into public.profiles (id, name, locale)
   values (
     new.id,
-    nullif(trim(coalesce(new.raw_user_meta_data ->> 'name', '')), '')
+    nullif(trim(coalesce(new.raw_user_meta_data ->> 'name', '')), ''),
+    -- O idioma em que a pessoa se cadastrou é o melhor palpite inicial. Valor
+    -- fora da lista cai no default em vez de estourar o check e derrubar o
+    -- signup inteiro.
+    case
+      when new.raw_user_meta_data ->> 'locale' in ('pt', 'en', 'es')
+        then new.raw_user_meta_data ->> 'locale'
+      else 'pt'
+    end
   )
   on conflict (id) do nothing;
 

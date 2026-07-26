@@ -16,7 +16,9 @@ export async function GET(request: NextRequest) {
   const type = searchParams.get("type") as EmailOtpType | null;
 
   if (!tokenHash || !type) {
-    redirect("/login?erro=link_invalido");
+    // Identificador em inglês como todo o resto do código (AGENTS.md); a
+    // tradução da mensagem acontece na tela, pelo catálogo.
+    redirect("/login?error=invalid_link");
   }
 
   const supabase = await createClient();
@@ -26,7 +28,9 @@ export async function GET(request: NextRequest) {
   });
 
   if (error) {
-    redirect("/login?erro=link_invalido");
+    // Identificador em inglês como todo o resto do código (AGENTS.md); a
+    // tradução da mensagem acontece na tela, pelo catálogo.
+    redirect("/login?error=invalid_link");
   }
 
   redirect("/");

@@ -1,0 +1,37 @@
+{
+  "app": {
+    "name": "Trilha",
+    "description": "Connects long-term goals to what you do today, without losing the thread."
+  },
+  "auth": {
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "nameLabel": "What should we call you?",
+    "login": {
+      "submit": "Sign in",
+      "submitting": "Signing in...",
+      "noAccount": "No account yet?",
+      "createAccount": "Create one"
+    },
+    "signup": {
+      "title": "Create account",
+      "submit": "Create account",
+      "submitting": "Creating...",
+      "hasAccount": "Already have an account?",
+      "login": "Sign in"
+    },
+    "confirm": {
+      "title": "Confirm your email",
+      "body": "We sent a confirmation link. Open it to activate your account.",
+      "backToLogin": "Back to sign in"
+    },
+    "errors": {
+      "emailFormat": "Check that the email is in the right format.",
+      "badCredentials": "Email or password don't match.",
+      "passwordTooShort": "Password needs at least 8 characters.",
+      "nameRequired": "What should we call you?",
+      "invalidLink": "That link expired or was already used. Request a new one.",
+      "generic": "We couldn't finish that right now. Try again."
+    }
+  }
+}

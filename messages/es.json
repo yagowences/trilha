@@ -1,0 +1,37 @@
+{
+  "app": {
+    "name": "Trilha",
+    "description": "Conecta metas de largo plazo con lo que haces hoy, sin perder el hilo."
+  },
+  "auth": {
+    "emailLabel": "Correo electrónico",
+    "passwordLabel": "Contraseña",
+    "nameLabel": "¿Cómo te llamamos?",
+    "login": {
+      "submit": "Entrar",
+      "submitting": "Entrando...",
+      "noAccount": "¿No tienes cuenta?",
+      "createAccount": "Crear cuenta"
+    },
+    "signup": {
+      "title": "Crear cuenta",
+      "submit": "Crear cuenta",
+      "submitting": "Creando...",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "login": "Entrar"
+    },
+    "confirm": {
+      "title": "Confirma tu correo",
+      "body": "Enviamos un enlace de confirmación. Ábrelo para activar tu cuenta.",
+      "backToLogin": "Volver a entrar"
+    },
+    "errors": {
+      "emailFormat": "Revisa que el correo tenga el formato correcto.",
+      "badCredentials": "El correo o la contraseña no coinciden.",
+      "passwordTooShort": "La contraseña necesita al menos 8 caracteres.",
+      "nameRequired": "¿Cómo te llamamos?",
+      "invalidLink": "Ese enlace expiró o ya se usó. Pide uno nuevo.",
+      "generic": "No pudimos completar esto ahora. Inténtalo de nuevo."
+    }
+  }
+}
